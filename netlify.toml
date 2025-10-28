@@ -1,8 +1,15 @@
 [build]
-  command = "npm run build"
-  publish = "dist"   # change if your build outputs elsewhere
-
-# SPA fallback
+  command = "npm run build:client"
+  functions = "netlify/functions"
+  publish = "dist/spa"
+ 
+ 
+[functions]
+  node_bundler = "esbuild"
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
 [[redirects]]
   from = "/*"
   to = "/index.html"
